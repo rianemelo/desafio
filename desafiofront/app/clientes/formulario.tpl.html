@@ -1,0 +1,62 @@
+<div ng-controller="ClientesController as vm" class="row justify-content-center align-items-center login-row">
+    <div class="col">
+        <h2>{{ page }}</h2>
+        <div class="mx-auto py-5 mt-5 jumbotron" style="width: 500px;">
+            <h3 class="text-center text-uppercase">Cadastro de Clientes</h3>
+            <form name="vm.form" ng-submit="vm.submit()">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input class="form-control" type="text" name="nome" ng-model="vm.cliente.nome"
+                           ng-pattern="nome.length > 3"
+                           placeholder="Nome">
+                    <small ng-show="vm.form.nome.$error.pattern && vm.validar"
+                        class="form-text text-danger">
+                        Min 3 caracteres!
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label>CPF</label>
+                    <input class="form-control" name="cpf" ng-model="vm.cliente.cpf"
+                           ng-required="true" placeholder="CPF">
+                    <small ng-show="vm.form.cpf.$error.required && vm.validar"
+                           class="form-text text-danger">
+                        Campo obrigatório!
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label>Endereço</label>
+                    <input class="form-control" name="endereco" ng-model="vm.cliente.endereco"
+                           ng-required="true" placeholder="Endereço">
+                    <small ng-show="vm.form.endereco.$error.required && vm.validar"
+                           class="form-text text-danger">
+                        Campo obrigatório!
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input class="form-control" name="email" ng-model="vm.cliente.email"
+                           ng-required="true" placeholder="email">
+                    <small ng-show="vm.form.email.$error.required && vm.validar"
+                           class="form-text text-danger">
+                        Campo obrigatório!
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label>Contato</label>
+                    <input class="form-control" name="contato" ng-model="vm.cliente.contato"
+                           ng-required="true" placeholder="Contato">
+                    <small ng-show="vm.form.contato.$error.required && vm.validar"
+                           class="form-text text-danger">
+                        Campo obrigatório!
+                    </small>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <button class="btn btn-primary mb-1" type="submit" ng-click="vm.validar = true;">
+                        <!-- vm.validar = "vm.validar = true"> -->
+                        Cadastrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

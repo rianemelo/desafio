@@ -1,0 +1,28 @@
+<div ng-controller="AlugarController as vm" class="row justify-content-center align-items-center login-row">
+    <div class="col">
+        <div class="mx-auto py-5 mt-5 jumbotron" style="width: 500px;">
+            <h3 class="text-center text-uppercase">Aluguel</h3>
+            <form name="vm.form" ng-submit="vm.alugar()">
+                <div class="form-group">
+                    <label>Carro</label>
+                    <input class="form-control" type="text" name="carro" ng-model="vm.aluguel.placa"
+                           ng-required="true" placeholder="Carro">
+                    <!-- <small ng-show="vm.form.username.$error.pattern && vm.validar"
+                           class="form-text text-danger">
+                        Campo obrigatório!
+                    </small> -->
+                </div>
+                <div class="form-group">
+                    <label>Cliente</label>
+                    <input class="form-control" name="cpf" ng-model="vm.aluguel.cpf"
+                           ng-required="true" placeholder="Senha">
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <button class="btn btn-primary mb-1" type="submit">
+                        Alugar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
