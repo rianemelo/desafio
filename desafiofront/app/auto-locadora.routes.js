@@ -22,6 +22,9 @@
             .when('/alugar', {
                 templateUrl: 'alugar/formulario.tpl.html'
             })
+            .when('/alugar/:placa', {
+                templateUrl: 'alugar/formulario.tpl.html'
+            })
             .otherwise({
                 redirectTo: '/home'
             });

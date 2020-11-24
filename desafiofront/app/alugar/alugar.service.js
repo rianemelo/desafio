@@ -9,27 +9,28 @@
     function alugarService($http, constantes, helper) {
 
         return {
-
+            listar : listar,
+            alugar: alugar
         }
 
         // ======================================
 
-/*         function listarClientes() {
-            return $http.get(constantes.URL_BASE + '/cliente')
+        function listar() {
+            return $http.get(constantes.URL_BASE + '/aluguel')
                 .then(function (response) {
                     return response.data;
                 })
                 .catch(helper.sendError);
         }
 
-        function inserirCliente(_params) {
-            return $http.post(constantes.URL_BASE + '/cliente', _params)
+        function alugar(_params) {
+            return $http.post(constantes.URL_BASE + '/aluguel', _params)
                 .then(function (response) {
                     return response.data;
                 })
                 .catch(helper.sendError);
         }
- */    
+    
 
     }
 

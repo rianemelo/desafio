@@ -12,9 +12,10 @@
 
         /* ***************    FUNÇÕES EXECUTADAS NA VIEW (HMTL)    **************** */
         vm.go = helper.go;
-        vm.iniciar = iniciar;
+        vm.iniciarCarros = iniciarCarros;
 
-        function iniciar() {
+        function iniciarCarros() {
+            //console.log("CarrosController called!");
             return vm.listarCarros();
         }
 

@@ -7,11 +7,12 @@
                 <div class="form-group">
                     <label>Nome</label>
                     <input class="form-control" type="text" name="nome" ng-model="vm.cliente.nome"
-                           ng-pattern="nome.length > 3"
-                           placeholder="Nome">
-                    <small ng-show="vm.form.nome.$error.pattern && vm.validar"
-                        class="form-text text-danger">
-                        Min 3 caracteres!
+                           ng-required="true" ng-pattern="/^[a-zA-Z\s]*$/" placeholder="Nome">
+                    <small ng-show="vm.form.nome.$error.pattern && vm.validar" class="form-text text-danger">
+                        Apenas letras e espaços são permitidos!
+                    </small>
+                    <small ng-show="(vm.cliente.nome.length > 100 || 3 > vm.cliente.nome.length) && vm.validar" class="form-text text-danger">
+                        Min 3 caracteres e Máx 100 caracteres!
                     </small>
                 </div>
                 <div class="form-group">
@@ -24,18 +25,9 @@
                     </small>
                 </div>
                 <div class="form-group">
-                    <label>Endereço</label>
-                    <input class="form-control" name="endereco" ng-model="vm.cliente.endereco"
-                           ng-required="true" placeholder="Endereço">
-                    <small ng-show="vm.form.endereco.$error.required && vm.validar"
-                           class="form-text text-danger">
-                        Campo obrigatório!
-                    </small>
-                </div>
-                <div class="form-group">
                     <label>E-mail</label>
                     <input class="form-control" name="email" ng-model="vm.cliente.email"
-                           ng-required="true" placeholder="email">
+                           ng-required="true" placeholder="E-mail">
                     <small ng-show="vm.form.email.$error.required && vm.validar"
                            class="form-text text-danger">
                         Campo obrigatório!
@@ -50,9 +42,48 @@
                         Campo obrigatório!
                     </small>
                 </div>
+                <br>
+                <div class="text-left"><b>Endereço</b></div>
+                <div class="form-group">
+                    <form name="vm.formEndereco" ng-submit="vm.submit()">
+                        <label>CEP</label>
+                        <input class="form-control" name="cep" ng-model="vm.cliente.endereco.cep"
+                           ng-required="true" placeholder="CEP">
+                        <small ng-show="vm.formEndereco.cep.$error.required && vm.validar"
+                           class="form-text text-danger">
+                        Campo obrigatório!
+                        </small>
+                        <label>Logradouro</label>
+                        <input class="form-control" name="logradouro" ng-model="vm.cliente.endereco.logradouro"
+                            placeholder="Logradouro">
+                        <label>Complemento</label>
+                        <input class="form-control" name="complemento" ng-model="vm.cliente.endereco.complemento"
+                            placeholder="Complemento">
+                        <label>Bairro</label>
+                        <input class="form-control" name="bairro" ng-model="vm.cliente.endereco.bairro"
+                           ng-required="true" placeholder="Bairro">
+                        <small ng-show="vm.formEndereco.bairro.$error.required && vm.validar"
+                           class="form-text text-danger">
+                        Campo obrigatório!
+                        </small>
+                        <label>Cidade</label>
+                        <input class="form-control" name="cidade" ng-model="vm.cliente.cidade"
+                           ng-required="true" placeholder="Cidade">
+                        <small ng-show="vm.formEndereco.cidade.$error.required && vm.validar"
+                           class="form-text text-danger">
+                            Campo obrigatório!
+                        </small>
+                        <label>UF</label>
+                        <input class="form-control" name="uf" ng-model="vm.cliente.endereco.uf"
+                           ng-required="true" placeholder="UF">
+                        <small ng-show="vm.formEndereco.uf.$error.required && vm.validar"
+                           class="form-text text-danger">
+                            Campo obrigatório!
+                        </small>
+                    </form>
+                </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <button class="btn btn-primary mb-1" type="submit" ng-click="vm.validar = true;">
-                        <!-- vm.validar = "vm.validar = true"> -->
                         Cadastrar
                     </button>
                 </div>

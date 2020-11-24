@@ -1,4 +1,4 @@
-<div ng-controller="CarrosController as vm" class="container" ng-init="vm.iniciar()">
+<div ng-controller="CarrosController as vm" class="container" ng-init="vm.iniciarCarros()">
     <h1>HOME</h1>
     <p>
         Bem-Vindo a
@@ -18,12 +18,18 @@
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">
                         {{ carro.marca }}
+                        <div ng-show="{{ carro.status == 'ON' }}">
+                            ALUGADO<br>Cliente: {{ vm.cliente.nome }}
+                        </div>
+                        
                     </h6>
                     <p>
-                        <strong>Ano: </strong> {{carro.ano}} &nbsp; | &nbsp;
-                        <strong>Placa: </strong> {{carro.placa | placaComHifen}}
+                        <strong>Ano: </strong> {{ carro.ano }} &nbsp; | &nbsp;
+                        <strong>Placa: </strong> {{ carro.placa | placaComHifen }}
                     </p>
-                    <a ng-click="" class="btn btn-primary text-center">Alugar</a>
+                    <a ng-show="{{ carro.status == 'OFF' }}" ng-controller="AlugarController as vm" ng-click="vm.irAlugar(carro)" 
+                        class="btn btn-primary text-center">Alugar
+                    </a>
                 </div>
             </div>
         </div>

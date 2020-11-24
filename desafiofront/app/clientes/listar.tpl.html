@@ -3,7 +3,9 @@
         <h2>{{ page }}</h2>
     </div>
     <hr>
-
+    <p>
+        <a ng-click="vm.go('/clientes/new')" class="btn btn-primary">ADD Cliente</a>
+    </p>
     <div ng-show="vm.listaClientes.length" class="list-group">
         <table class="table">
             <thead class="table-active">
@@ -13,7 +15,7 @@
                     <th scope="col" width="40%">Endereço</th>
                     <th scope="col" width="25%">CPF</th>
                     <th scope="col" width="25%">Contato</th>
-                    <th scope="col"> </th>
+                    <!-- <th scope="col"></th> -->
                 </tr>
             </thead>
             <tbody>
@@ -23,22 +25,19 @@
                     <td>{{ cliente.endereco }}</td>
                     <td>{{ cliente.cpf }}</td>
                     <td>{{ cliente.contato }}</td>
-                    <td>
+                    <!-- <td>
                         <button type="button" class="btn btn-link mr-2" ng-click="vm.irEditar(cliente)">
                             Edit
                         </button>
                         <button type="button" class="btn btn-link text-danger" ng-click="vm.deletar(cliente._cpf)">
                             Del
                         </button>
-                    </td>
+                    </td> -->
                 </tr>
             </tbody>
         </table>
     </div>
     <div ng-hide="vm.listaClientes.length" class="alert alert-info">
-        :( não há clientes em nosso registro, para cadastrar um novo cliente, clique no botão abaixo.
+        :( não há clientes em nosso registro, para cadastrar um novo cliente clique em ADD Cliente.
     </div>
-    <p>
-        <a ng-click="vm.go('/clientes/new')" class="btn btn-primary">ADD Cliente</a>
-    </p>
 </div>

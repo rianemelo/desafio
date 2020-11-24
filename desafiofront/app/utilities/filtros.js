@@ -13,6 +13,11 @@
                 return (angular.isString(input) && input.length > 0) ?
                     input.substr(0, 3).toUpperCase() + '-' + input.substr(3) : input;
             }
+        })
+        .filter('carroOFF', function () {
+            return function (carro) {
+                return carro.status='OFF' ? true : false;
+            }
         });
 
 })();

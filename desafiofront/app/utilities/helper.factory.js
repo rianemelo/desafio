@@ -59,6 +59,7 @@
 
         function go(_path) {
             $rootScope.alertas = [];
+            $rootScope.placa = "";
             var path = _path ? _path : $location.path();
             $location.path(path);
             $rootScope.page = setPage();
