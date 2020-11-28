@@ -10,7 +10,8 @@
 
         return {
             listarClientes: listarClientes,
-            inserirCliente: inserirCliente
+            inserirCliente: inserirCliente,
+            buscarClientePorCpf: buscarClientePorCpf
         }
 
         // ======================================
@@ -20,7 +21,7 @@
                 .then(function (response) {
                     return response.data;
                 })
-                .catch(helper.sendError);
+                .catch(helper.sendError); //no backend ainda não tem exceções que mandem erros
         }
 
         function inserirCliente(_params) {
@@ -32,8 +33,34 @@
                 .catch(helper.sendError);
         }
     
+        function buscarClientePorCpf(cpf) {
+            return $http.get(constantes.URL_BASE + '/cliente/' + cpf)
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(helper.sendError);
+                
+                /* sem usar a helper
+                .catch(function (error) {
+                    console.log(error.data.message);
+                }); */
+        }
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 })();

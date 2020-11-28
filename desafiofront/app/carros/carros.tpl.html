@@ -18,8 +18,8 @@
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">
                         {{ carro.marca }}
-                        <div ng-show="{{ carro.status == 'ON' }}">
-                            ALUGADO<br>Cliente: {{ vm.cliente.nome }}
+                        <div ng-app="AlugarController" ng-show="{{ carro.status == 'ON' }}">
+                            ALUGADO<br>Cliente: {{ vm.buscarClientePor }}
                         </div>
                         
                     </h6>

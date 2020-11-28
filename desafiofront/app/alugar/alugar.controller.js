@@ -4,9 +4,15 @@
     angular.module('autoLocadoraApp')
         .controller('AlugarController', alugarController);
 
-        alugarController.$inject = ['HelperFactory', 'AlugarService', '$routeParams', 'CarrosService', '$filter'];
+        alugarController.$inject = [
+            'HelperFactory',
+            'AlugarService',
+            '$routeParams',
+            'CarrosService',
+            'ClienteService'
+        ];
 
-    function alugarController(helper, service, $routeParams, carrosService, $filter) {
+    function alugarController(helper, service, $routeParams, carrosService, clienteService) {
         
         var vm = this;
         /* vm.aluguel = {
@@ -21,9 +27,9 @@
         vm.iniciarAlugar = iniciarAlugar;
         vm.irAlugar = irAlugar;
         vm.alugar = alugar;
+        
 
         function iniciarAlugar() {
-            //console.log("AlugarController called!");
             if ($routeParams.placa) {
                 helper.setRootScope('placa', $routeParams.placa);
                 return carrosService.consultarCarro($routeParams.placa)
@@ -42,21 +48,16 @@
 
         function irAlugar(_carro) {
             helper.go('/alugar/' + _carro.placa);
-            //console.log("$routeParams=>>", $routeParams); //vem do routes
         }
 
         function alugar() {
-            //vm.isValido(vm.aluguel);
             return service.alugar(vm.aluguel)
                 .then(function (_resp) {
                     helper.go('/home');
-                    helper.addAlerta("Aluguel realizado com sucesso!", "info");
-            
-                    /* if (_resp.erros) {
-                        helper.addMsg(null, 'danger', 'Tente novamente');
+                    if (_resp.error) {
+                        helper.addAlerta(null, 'danger', 'Tente novamente');
                     } else
-                        helper.addAlerta("Cliente cadastrado com sucesso!", "succes"); */
-                    //helper.rootScopeApply();
+                        helper.addAlerta("Aluguel realizado com sucesso!", "info");
                 });
         }
         
@@ -64,14 +65,66 @@
         
 
         /* ***************    FUNÇÕES INTERNAS    ******************************** */
+        /* vm.buscarAluguelPorPlaca = buscarAluguelPorPlaca;
+        vm.buscarClientePorCpf = buscarClientePorCpf;
+        vm.isValido = isValido;
+ */
         //Não permitir aluguel sem cliente & Exibir somente carros disponíveis para aluguel.    
         /* function sendError(_error) {
             return { error: true, msg: _error.data.message };
         } */
-/*         function validar(aluguel) {
-            return  
+
+        /* function buscarAluguelPorPlaca(_placa) {
+            return service.buscarAluguelPorPlaca(_placa)
+                .then(function (_aluguel) {
+                    vm.cliente = {
+                        cpf: _aluguel.cpf
+                    }
+                })                
         }
- */ 
+ */
+        /* function buscarClientePorCpf() {
+            return clienteService.buscarClientePorCpf(vm.aluguel.cpf)
+            .then(function (_cliente) {
+                 vm.cliente = {
+                    nome: _cliente.nome
+                }
+                console.log('vm.cliente', vm.cliente);
+            });
+
+        } */
+
+        /* A placa de um carro aparece de duas formas:
+        1: na lista, que só mostra placas OFF (i.e., carros atualmente não alugados),
+        2: através do routeParams depois de clicar no ALUGAR, também só OFF
+        assim, sem ulterior verificação se a placa está OFF*/
+        /* function isValido() {    
+            buscarClientePorCpf();
+            return vm.cliente.nome ? true : false;
+            
+        } */
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 })();

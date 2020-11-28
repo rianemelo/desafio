@@ -10,7 +10,8 @@
 
         return {
             listar : listar,
-            alugar: alugar
+            alugar: alugar,
+            buscarAluguelPorPlaca: buscarAluguelPorPlaca
         }
 
         // ======================================
@@ -28,9 +29,20 @@
                 .then(function (response) {
                     return response.data;
                 })
+                //.catch(helper.sendError);
+                .catch(function (error) {
+                    console.log(error.data.message);
+                    //return { error: true, msg: _error.data.message };
+                }); 
+        }
+        
+        function buscarAluguelPorPlaca(placa) {
+            return $http.get(constantes.URL_BASE + '/aluguel/placa' + placa)
+                .then(function (response) {
+                    return response.data;
+                })
                 .catch(helper.sendError);
         }
-    
 
     }
 

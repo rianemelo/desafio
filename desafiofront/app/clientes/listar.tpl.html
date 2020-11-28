@@ -5,6 +5,11 @@
     <hr>
     <p>
         <a ng-click="vm.go('/clientes/new')" class="btn btn-primary">ADD Cliente</a>
+        <form ng-submit="vm.consultar()">
+            <input type="text" ng-model="vm.cpf">
+            <button>Consultar</button>
+            {{ vm.cliente }}
+        </form>
     </p>
     <div ng-show="vm.listaClientes.length" class="list-group">
         <table class="table">

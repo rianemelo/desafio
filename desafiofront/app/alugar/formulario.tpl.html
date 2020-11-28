@@ -5,32 +5,12 @@
             <form name="vm.form" ng-submit="vm.alugar()">
                 <div class="form-group">
                     <label>Carro</label>
-                    <input class="form-control" type="text" readonly="true" name="carro"
-                        ng-show="placa" ng-model="vm.aluguel.placa" ng-required="true">
-                    <select class="form-control" name="carro" ng-model="vm.aluguel.placa" ng-hide="placa"
-                        ng-options=
-                        "carro.placa as carro.placa for carro in ((vm.listaCarros | filter:{status:'OFF'})) track by $index">
-                        <option value="carro.placa"> Selecione... </option>
+                    <input ng-show="placa" class="form-control" type="text" readonly="true" name="carro"
+                         ng-model="vm.aluguel.placa" ng-required="true">
+                    <select ng-hide="placa" class="form-control" name="carro" ng-model="vm.aluguel.placa"
+                        ng-options="carro.placa as carro.placa for carro in ((vm.listaCarros | filter:{status:'OFF'}))">
+                        <option value="carro.placa">Selecione...</option>
                     </select>
-<!-- "carro.placa as carro.placa for carro in vm.listaCarros track by $index | filter:{status:'OFF'}"> -->
-                    <!-- select as label disable when disable for (key, value) in object -->
-                    <!-- <select class="form-control" name="carro" ng-model="vm.aluguel.placa" ng-hide="placa"
-                        ng-options="carro.placa as carro.placa for carro in vm.listaCarros track by $index">
-                        <option value="Selecione...">
-                            Placa
-                        </option>
-                    </select> -->
-          
-                    <!-- <div class="form-group">
-                    <label>Tipo E-mail</label>
-<select class="form-control" ng-model="vm.user.tipoEmail" name="tipo" 
-ng-options="item.id as item.desc group by item.tipo disable when item.disable for item in vm.tiposEmail | orderBy:'desc'">
-                        <option value=""> Selecione... </option>
-                    </select>
-                    <span style="font-size: 2rem;">{{vm.user.tipoEmail | json}}</span>
-                </div> -->
-
-
                 </div>
                 <div class="form-group">
                     <label>Cliente</label>
@@ -42,6 +22,7 @@ ng-options="item.id as item.desc group by item.tipo disable when item.disable fo
                         Alugar
                     </button>
                 </div>
+                {{ vm.aluguel }}
             </form>
         </div>
     </div>
