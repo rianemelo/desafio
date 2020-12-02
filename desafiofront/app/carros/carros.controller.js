@@ -4,14 +4,15 @@
     angular.module('autoLocadoraApp')
         .controller('CarrosController', carrosController);
 
-        carrosController.$inject = ['HelperFactory', 'CarrosService'];
+        carrosController.$inject = ['HelperFactory', 'CarrosService', '$rootScope'];
 
-    function carrosController(helper, service) {
+    function carrosController(helper, service, $rootScope) {
         var vm = this;
         /* ***************    INIT VARIÁVEIS    *********************************** */
 
         /* ***************    FUNÇÕES EXECUTADAS NA VIEW (HMTL)    **************** */
         vm.go = helper.go;
+        //vm.apply = helper.rootScopeApply();
         vm.iniciarCarros = iniciarCarros;
 
         function iniciarCarros() {
@@ -28,6 +29,7 @@
                 .then(function (_listaCarros) {
                     vm.listaCarros = _listaCarros;
                     //helper.rootScopeApply();
+                    $rootScope.$apply();
                 });
         }
 

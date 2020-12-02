@@ -9,27 +9,28 @@
             'AlugarService',
             '$routeParams',
             'CarrosService',
-            'ClienteService'
+            'ClientesService',
+            '$rootScope'
         ];
 
-    function alugarController(helper, service, $routeParams, carrosService, clienteService) {
+    function alugarController(helper, service, $routeParams, carrosService, clientesService, $rootScope) {
         
         var vm = this;
-        /* vm.aluguel = {
-            placa: "",
-            cpf: ""
-        }; */
+        
         /* ***************    INIT VARIÁVEIS    *********************************** */
         
 
         /* ***************    FUNÇÕES EXECUTADAS NA VIEW (HMTL)    **************** */
         vm.go = helper.go;
-        vm.iniciarAlugar = iniciarAlugar;
+        //vm.rootScopeApply() = helper.rootScopeApply();
+        vm.iniciar = iniciar;
         vm.irAlugar = irAlugar;
         vm.alugar = alugar;
+        vm.listarCarros = listarCarros;
+        vm.listarClientes = listarClientes;
         
 
-        function iniciarAlugar() {
+        function iniciar() {
             if ($routeParams.placa) {
                 helper.setRootScope('placa', $routeParams.placa);
                 return carrosService.consultarCarro($routeParams.placa)
@@ -39,10 +40,8 @@
                         }
                     });
             } else {
-                return carrosService.listarCarros()
-                .then(function (_listaCarros) {
-                    vm.listaCarros = _listaCarros;
-                });
+                listarCarros();
+                listarClientes();
             }
         }
 
@@ -55,12 +54,35 @@
                 .then(function (_resp) {
                     helper.go('/home');
                     if (_resp.error) {
-                        helper.addAlerta(null, 'danger', 'Tente novamente');
-                    } else
+                        helper.addAlerta(_resp.msg, 'danger');
+                    } else {
                         helper.addAlerta("Aluguel realizado com sucesso!", "info");
+                    }
+                    //helper.rootScopeApply();
+                    $rootScope.$apply();
                 });
+                
         }
         
+        function listarCarros() {
+            return carrosService.listarCarros()
+                .then(function (_listaCarros) {
+                    vm.listaCarros = _listaCarros;
+                    //console.log("Carros=>>", _listaCarros);
+                    //helper.rootScopeApply();
+                    $rootScope.$apply();
+                });
+        }
+
+        function listarClientes() {
+            return clientesService.listarClientes()
+                .then(function (_listaClientes) {
+                    vm.listaClientes = _listaClientes;
+                    //console.log("Clientes=>>", _listaClientes);
+                    //helper.rootScopeApply();
+                    $rootScope.$apply();
+                });
+        }
         /* ***************    FUNÇÕES ADD 'VM' PARA TESTES     **************** */
         
 
@@ -74,15 +96,15 @@
             return { error: true, msg: _error.data.message };
         } */
 
-        /* function buscarAluguelPorPlaca(_placa) {
-            return service.buscarAluguelPorPlaca(_placa)
+        /* function buscarAluguelPorCpf(_cpf) {
+            return service.buscarAluguelPorCpf(vm.cliente.cpf)
                 .then(function (_aluguel) {
-                    vm.cliente = {
-                        cpf: _aluguel.cpf
+                    vm.alugado = {
+                        carro: _aluguel.placa
                     }
                 })                
-        }
- */
+        } */
+ 
         /* function buscarClientePorCpf() {
             return clienteService.buscarClientePorCpf(vm.aluguel.cpf)
             .then(function (_cliente) {
@@ -103,28 +125,6 @@
             return vm.cliente.nome ? true : false;
             
         } */
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 })();

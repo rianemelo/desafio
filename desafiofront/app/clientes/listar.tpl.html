@@ -25,7 +25,9 @@
             </thead>
             <tbody>
                 <tr ng-repeat="cliente in vm.listaClientes">
-                    <td>{{ cliente.nome }}</td>
+                    <td>
+                        {{ cliente.nome }} {{ cliente.status }}
+                    </td>
                     <td>{{ cliente.email }}</td>
                     <td>{{ cliente.endereco }}</td>
                     <td>{{ cliente.cpf }}</td>

@@ -2,11 +2,11 @@
     "use strict";
 
     angular.module('autoLocadoraApp')
-        .service('ClienteService', clienteService);
+        .service('ClientesService', clientesService);
 
-    clienteService.$inject = ['$http', 'constantes', 'HelperFactory'];
+    clientesService.$inject = ['$http', 'constantes', 'HelperFactory'];
 
-    function clienteService($http, constantes, helper) {
+    function clientesService($http, constantes, helper) {
 
         return {
             listarClientes: listarClientes,

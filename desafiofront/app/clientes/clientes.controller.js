@@ -4,14 +4,15 @@
     angular.module('autoLocadoraApp')
         .controller('ClientesController', clientesController);
 
-        clientesController.$inject = ['HelperFactory', 'ClienteService'];
+        clientesController.$inject = ['HelperFactory', 'ClientesService', '$rootScope'];
 
-    function clientesController(helper, service) {
+    function clientesController(helper, service, $rootScope) {
         var vm = this;
         /* ***************    INIT VARIÁVEIS    *********************************** */
 
         /* ***************    FUNÇÕES EXECUTADAS NA VIEW (HMTL)    **************** */
         vm.go = helper.go;
+        //vm.apply = helper.rootScopeApply();
         vm.iniciar = iniciar;
         vm.submit = submit;
         vm.consultar = consultar;        
@@ -34,6 +35,7 @@
                     } else
                         helper.addAlerta("Cliente cadastrado com sucesso!", "succes"); */
                     //helper.rootScopeApply();
+                    $rootScope.$apply();
                 });
         }
 
@@ -42,6 +44,7 @@
                 .then(function (_listaClientes) {
                     vm.listaClientes = _listaClientes;
                     //helper.rootScopeApply();
+                    $rootScope.$apply();
                 });
         }
 
@@ -53,6 +56,8 @@
                     } else {
                         helper.addAlerta(_resp.message, 'success');
                     }
+                    //helper.rootScopeApply();
+                    $rootScope.$apply();
                 });
         }
 

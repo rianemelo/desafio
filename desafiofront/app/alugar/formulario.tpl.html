@@ -1,4 +1,4 @@
-<div ng-controller="AlugarController as vm" ng-init="vm.iniciarAlugar()" class="row justify-content-center align-items-center login-row">
+<div ng-controller="AlugarController as vm" ng-init="vm.iniciar()" class="row justify-content-center align-items-center login-row">
     <div class="col">
         <div class="mx-auto py-5 mt-5 jumbotron" style="width: 500px;">
             <h3 class="text-center text-uppercase">Aluguel</h3>
@@ -8,21 +8,22 @@
                     <input ng-show="placa" class="form-control" type="text" readonly="true" name="carro"
                          ng-model="vm.aluguel.placa" ng-required="true">
                     <select ng-hide="placa" class="form-control" name="carro" ng-model="vm.aluguel.placa"
-                        ng-options="carro.placa as carro.placa for carro in ((vm.listaCarros | filter:{status:'OFF'}))">
-                        <option value="carro.placa">Selecione...</option>
+                        ng-options="carro.placa as carro.placa for carro in ((vm.listaCarros | filter:{status:'OFF'})) track by carro.placa">
+                        <option value="carro.placa"></option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Cliente</label>
-                    <input class="form-control" name="cliente" ng-model="vm.aluguel.cpf"
-                           ng-required="true" placeholder="CPF">
+                    <select class="form-control" name="cliente" ng-model="vm.aluguel.cpf" 
+                        ng-options="cliente.cpf as cliente.nome for cliente in ((vm.listaClientes | filter:{status:'OFF'})) track by cliente.cpf">
+                        <option value="cliente.cpf"></option>
+                    </select>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <button class="btn btn-primary mb-1" type="submit">
+                    <button class="btn btn-primary mb-1" type="submit" ng-click="vm.validar=true">
                         Alugar
                     </button>
                 </div>
-                {{ vm.aluguel }}
             </form>
         </div>
     </div>

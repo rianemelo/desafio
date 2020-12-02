@@ -44,9 +44,9 @@
             return $rootScope[_key];
         }
 
-        /* function rootScopeApply() {
+        function rootScopeApply() {
             $rootScope.$apply(); 
-        } */
+        }
 
         function sendError(_error) {
             return { error: true, msg: _error.data.message };
