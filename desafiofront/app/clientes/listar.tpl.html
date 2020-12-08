@@ -5,12 +5,8 @@
     <hr>
     <p>
         <a ng-click="vm.go('/clientes/new')" class="btn btn-primary">ADD Cliente</a>
-        <form ng-submit="vm.consultar()">
-            <input type="text" ng-model="vm.cpf">
-            <button>Consultar</button>
-            {{ vm.cliente }}
-        </form>
     </p>
+    
     <div ng-show="vm.listaClientes.length" class="list-group">
         <table class="table">
             <thead class="table-active">
@@ -20,26 +16,21 @@
                     <th scope="col" width="40%">Endereço</th>
                     <th scope="col" width="25%">CPF</th>
                     <th scope="col" width="25%">Contato</th>
-                    <!-- <th scope="col"></th> -->
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="cliente in vm.listaClientes">
                     <td>
-                        {{ cliente.nome }} {{ cliente.status }}
+                        <div ng-click="vm.verHistorico(cliente)" style="text-decoration:none"
+                            class="list-group-item-action d-flex justify-content-between align-items-center">
+                            {{ cliente.nome }} 
+                        </div>
+                        <small ng-show="cliente.carro" ng-style="{color:'#df691a'}">{{ cliente.carro }}</small>
                     </td>
                     <td>{{ cliente.email }}</td>
                     <td>{{ cliente.endereco }}</td>
                     <td>{{ cliente.cpf }}</td>
                     <td>{{ cliente.contato }}</td>
-                    <!-- <td>
-                        <button type="button" class="btn btn-link mr-2" ng-click="vm.irEditar(cliente)">
-                            Edit
-                        </button>
-                        <button type="button" class="btn btn-link text-danger" ng-click="vm.deletar(cliente._cpf)">
-                            Del
-                        </button>
-                    </td> -->
                 </tr>
             </tbody>
         </table>

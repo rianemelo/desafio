@@ -8,14 +8,14 @@
                     <input ng-show="placa" class="form-control" type="text" readonly="true" name="carro"
                          ng-model="vm.aluguel.placa" ng-required="true">
                     <select ng-hide="placa" class="form-control" name="carro" ng-model="vm.aluguel.placa"
-                        ng-options="carro.placa as carro.placa for carro in ((vm.listaCarros | filter:{status:'OFF'})) track by carro.placa">
+                        ng-options="carro.placa as carro.placa for carro in ((vm.listaCarros | filter:{cliente:'!'})) track by carro.placa">
                         <option value="carro.placa"></option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Cliente</label>
                     <select class="form-control" name="cliente" ng-model="vm.aluguel.cpf" 
-                        ng-options="cliente.cpf as cliente.nome for cliente in ((vm.listaClientes | filter:{status:'OFF'})) track by cliente.cpf">
+                        ng-options="cliente.cpf as cliente.nome for cliente in ((vm.listaClientes | filter:{carro:'!'})) track by cliente.cpf">
                         <option value="cliente.cpf"></option>
                     </select>
                 </div>

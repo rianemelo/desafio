@@ -11,13 +11,16 @@
     function routes($routeProvider) {
         $routeProvider
             .when('/home', {
-                templateUrl: 'carros/carros.tpl.html' //na "home" quero só os carros free
+                templateUrl: 'carros/carros.tpl.html'
             })
             .when('/clientes/listar', {
                 templateUrl: 'clientes/listar.tpl.html'
             })
             .when('/clientes/new', {
                 templateUrl: 'clientes/formulario.tpl.html'
+            })
+            .when('/clientes/historico/:cpf', {
+                templateUrl: 'clientes/historico.tpl.html'
             })
             .when('/alugar', {
                 templateUrl: 'alugar/formulario.tpl.html'

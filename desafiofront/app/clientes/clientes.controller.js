@@ -4,24 +4,24 @@
     angular.module('autoLocadoraApp')
         .controller('ClientesController', clientesController);
 
-        clientesController.$inject = ['HelperFactory', 'ClientesService', '$rootScope'];
+        clientesController.$inject = ['HelperFactory', 'ClientesService', 'AlugarService', '$routeParams'];
 
-    function clientesController(helper, service, $rootScope) {
+    function clientesController(helper, service, alugarService, $routeParams) {
         var vm = this;
         /* ***************    INIT VARIÁVEIS    *********************************** */
 
         /* ***************    FUNÇÕES EXECUTADAS NA VIEW (HMTL)    **************** */
         vm.go = helper.go;
-        //vm.apply = helper.rootScopeApply();
         vm.iniciar = iniciar;
         vm.submit = submit;
         vm.consultar = consultar;        
+        vm.buscarAluguelPorCpf = alugarService.buscarAluguelPorCpf;
+        vm.verHistorico = verHistorico;
+        vm.historico = historico;
+
 
         function iniciar() {
-            //helper.addAlerta("Cliente cadastrado com sucesso!", "succes");
             return vm.listarClientes();
-            
-
         }
 
         function submit() {
@@ -29,13 +29,11 @@
                 .then(function (_resp) {
                     helper.go('/clientes/listar');
                     helper.addAlerta("Cliente cadastrado com sucesso!", "info");
-            
-                    /* if (_resp.erros) {
+                    if (_resp.erros) {
                         helper.addMsg(null, 'danger', 'Tente novamente');
                     } else
-                        helper.addAlerta("Cliente cadastrado com sucesso!", "succes"); */
-                    //helper.rootScopeApply();
-                    $rootScope.$apply();
+                        helper.addAlerta("Cliente cadastrado com sucesso!", "succes");
+                    
                 });
         }
 
@@ -43,8 +41,6 @@
             return service.listarClientes()
                 .then(function (_listaClientes) {
                     vm.listaClientes = _listaClientes;
-                    //helper.rootScopeApply();
-                    $rootScope.$apply();
                 });
         }
 
@@ -56,10 +52,24 @@
                     } else {
                         helper.addAlerta(_resp.message, 'success');
                     }
-                    //helper.rootScopeApply();
-                    $rootScope.$apply();
                 });
         }
+
+        function verHistorico(_cliente) {
+            helper.go('/clientes/historico/' + _cliente.cpf);
+        }
+
+        function historico(_cpf) {
+            if ($routeParams.cpf) {
+                helper.setRootScope('cpf', $routeParams.cpf);
+                return alugarService.buscarAluguelPorCpf($routeParams.cpf)
+                .then(function (_historico) {
+                    vm.historico = _historico;
+                });
+            }
+        }
+
+        
 
         /* function logar() {
             return service.logar(vm.login)

@@ -11,7 +11,8 @@
         return {
             listar : listar,
             alugar: alugar,
-            buscarAluguelPorPlaca: buscarAluguelPorPlaca
+            buscarAluguelPorPlaca: buscarAluguelPorPlaca,
+            buscarAluguelPorCpf: buscarAluguelPorCpf
         }
 
         // ======================================
@@ -38,7 +39,7 @@
         }
     
         function buscarAluguelPorCpf(cpf) {
-            return $http.get(constantes.URL_BASE + '/aluguel/cpf' + cpf)
+            return $http.get(constantes.URL_BASE + '/aluguel/cpf/' + cpf)
                 .then(function (response) {
                     return response.data;
                 })

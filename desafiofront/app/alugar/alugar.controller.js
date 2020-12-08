@@ -22,7 +22,6 @@
 
         /* ***************    FUNÇÕES EXECUTADAS NA VIEW (HMTL)    **************** */
         vm.go = helper.go;
-        //vm.rootScopeApply() = helper.rootScopeApply();
         vm.iniciar = iniciar;
         vm.irAlugar = irAlugar;
         vm.alugar = alugar;
@@ -58,8 +57,6 @@
                     } else {
                         helper.addAlerta("Aluguel realizado com sucesso!", "info");
                     }
-                    //helper.rootScopeApply();
-                    $rootScope.$apply();
                 });
                 
         }
@@ -68,9 +65,6 @@
             return carrosService.listarCarros()
                 .then(function (_listaCarros) {
                     vm.listaCarros = _listaCarros;
-                    //console.log("Carros=>>", _listaCarros);
-                    //helper.rootScopeApply();
-                    $rootScope.$apply();
                 });
         }
 
@@ -78,9 +72,6 @@
             return clientesService.listarClientes()
                 .then(function (_listaClientes) {
                     vm.listaClientes = _listaClientes;
-                    //console.log("Clientes=>>", _listaClientes);
-                    //helper.rootScopeApply();
-                    $rootScope.$apply();
                 });
         }
         /* ***************    FUNÇÕES ADD 'VM' PARA TESTES     **************** */

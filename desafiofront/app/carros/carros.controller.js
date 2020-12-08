@@ -12,11 +12,9 @@
 
         /* ***************    FUNÇÕES EXECUTADAS NA VIEW (HMTL)    **************** */
         vm.go = helper.go;
-        //vm.apply = helper.rootScopeApply();
-        vm.iniciarCarros = iniciarCarros;
+        vm.iniciar = iniciar;
 
-        function iniciarCarros() {
-            //console.log("CarrosController called!");
+        function iniciar() {
             return vm.listarCarros();
         }
 
@@ -28,8 +26,6 @@
             return service.listarCarros()
                 .then(function (_listaCarros) {
                     vm.listaCarros = _listaCarros;
-                    //helper.rootScopeApply();
-                    $rootScope.$apply();
                 });
         }
 

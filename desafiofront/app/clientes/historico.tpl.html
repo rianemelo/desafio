@@ -1,0 +1,27 @@
+<div ng-controller="ClientesController as vm" class="container" ng-init="vm.historico()">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2>{{ page }}</h2>
+    </div>
+    <hr>
+    <div ng-show="vm.historico.length" class="list-group">
+        <table class="table">
+            <thead class="table-active">
+                <tr>
+                    <th scope="col" width="30%">Data de Locação</th>
+                    <th scope="col" width="30%">Placa</th>
+                    <th scope="col" width="30%">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="aluguel in vm.historico">
+                    <td>{{ aluguel.data }}</td>
+                    <td>{{ aluguel.placa }}</td>
+                    <td>{{ aluguel.status }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-hide="vm.historico.length" class="alert alert-info">
+        Cliente ainda não alugou carros com a AutoLocadora!
+    </div>
+</div>

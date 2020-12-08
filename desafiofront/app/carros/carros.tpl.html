@@ -1,4 +1,4 @@
-<div ng-controller="CarrosController as vm" class="container" ng-init="vm.iniciarCarros()">
+<div ng-controller="CarrosController as vm" class="container" ng-init="vm.iniciar()">
     <h1>HOME</h1>
     <p>
         Bem-Vindo a
@@ -11,23 +11,21 @@
     <div class="row">
         <div class="col-4" ng-repeat="carro in vm.listaCarros track by $index">
             <div class="card mb-4" style="width: 18rem;">
-                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
                 <div class="card-body">
                     <h5 class="card-title">
                         {{ carro.modelo }}
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">
                         {{ carro.marca }}
-                        <div ng-app="AlugarController" ng-show="{{ carro.status == 'ON' }}">
-                            ALUGADO<br>Cliente: {{ vm.buscarClientePor }}
-                        </div>
-                        
+                        <div ng-show="carro.cliente">
+                            ALUGADO<br>Cliente: {{ carro.cliente }}
+                        </div>                  
                     </h6>
                     <p>
                         <strong>Ano: </strong> {{ carro.ano }} &nbsp; | &nbsp;
                         <strong>Placa: </strong> {{ carro.placa | placaComHifen }}
                     </p>
-                    <a ng-show="{{ carro.status == 'OFF' }}" ng-controller="AlugarController as vm" ng-click="vm.irAlugar(carro)" 
+                    <a ng-hide="carro.cliente" ng-controller="AlugarController as vm" ng-click="vm.irAlugar(carro)" 
                         class="btn btn-primary text-center">Alugar
                     </a>
                 </div>
