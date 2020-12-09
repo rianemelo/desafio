@@ -6,84 +6,81 @@
             <form name="vm.form" ng-submit="vm.submit()">
                 <div class="form-group">
                     <label>Nome</label>
-                    <input class="form-control" type="text" name="nome" ng-model="vm.cliente.nome"
-                           ng-required="true" ng-pattern="/^[a-zA-Z\s]*$/" placeholder="Nome">
+                    <input class="form-control" type="text" name="nome" ng-model="vm.cliente.nome" ng-required="true"
+                        ng-pattern="/^[a-zA-Z\s]*$/" placeholder="Nome">
                     <small ng-show="vm.form.nome.$error.pattern && vm.validar" class="form-text text-danger">
                         Apenas letras e espaços.
                     </small>
-                    <small ng-show="(vm.cliente.nome.length > 100 || 3 > vm.cliente.nome.length) && vm.validar" class="form-text text-danger">
+                    <small ng-show="(vm.cliente.nome.length > 100 || 3 > vm.cliente.nome.length) && vm.validar"
+                        class="form-text text-danger">
                         Min 3 caracteres e Máx 100 caracteres!
                     </small>
                 </div>
                 <div class="form-group">
                     <label>CPF</label>
-                    <input class="form-control" name="cpf" type="number" ng-model="vm.cliente.cpf"
-                           ng-required="true" placeholder="CPF">
+                    <input class="form-control" name="cpf" type="number" ng-model="vm.cliente.cpf" ng-required="true"
+                        placeholder="CPF - Apenas números">
                 </div>
                 <div class="form-group">
                     <label>E-mail</label>
-                    <input class="form-control" name="email" ng-model="vm.cliente.email"
-                           ng-required="true" placeholder="E-mail">
-                    <small ng-show="vm.form.email.$error.required && vm.validar"
-                           class="form-text text-danger">
-                        Campo obrigatório!
+                    <input class="form-control" type="email" name="email" ng-model="vm.cliente.email" ng-required="true"
+                        placeholder="E-mail">
+                    <small ng-show="vm.form.email.$error.email && vm.validar" class="form-text text-danger">
+                        E-mail inválido!
                     </small>
                 </div>
                 <div class="form-group">
                     <label>Contato</label>
-                    <input class="form-control" name="contato" ng-model="vm.cliente.contato"
-                           ng-required="true" placeholder="Contato">
-                    <small ng-show="vm.form.contato.$error.required && vm.validar"
-                           class="form-text text-danger">
+                    <input class="form-control" name="contato" ng-model="vm.cliente.contato" ng-required="true"
+                        placeholder="Contato">
+                    <small ng-show="vm.form.contato.$error.required && vm.validar" class="form-text text-danger">
                         Campo obrigatório!
                     </small>
                 </div>
                 <br>
-                <div class="text-left"><b>Endereço</b></div>
-                <div class="form-group">
-                    <form name="vm.formEndereco" ng-submit="vm.submit()">
-                        <label>CEP</label>
-                        <input class="form-control" name="cep" ng-model="vm.cliente.endereco.cep"
-                           ng-required="true" placeholder="CEP">
-                        <small ng-show="vm.formEndereco.cep.$error.required && vm.validar"
-                           class="form-text text-danger">
-                        Campo obrigatório!
-                        </small>
-                        <label>Logradouro</label>
-                        <input class="form-control" name="logradouro" ng-model="vm.cliente.endereco.logradouro"
-                            placeholder="Logradouro">
-                        <label>Complemento</label>
-                        <input class="form-control" name="complemento" ng-model="vm.cliente.endereco.complemento"
-                            placeholder="Complemento">
-                        <label>Bairro</label>
-                        <input class="form-control" name="bairro" ng-model="vm.cliente.endereco.bairro"
-                           ng-required="true" placeholder="Bairro">
-                        <small ng-show="vm.formEndereco.bairro.$error.required && vm.validar"
-                           class="form-text text-danger">
-                        Campo obrigatório!
-                        </small>
-                        <label>Cidade</label>
-                        <input class="form-control" name="cidade" ng-model="vm.cliente.cidade"
-                           ng-required="true" placeholder="Cidade">
-                        <small ng-show="vm.formEndereco.cidade.$error.required && vm.validar"
-                           class="form-text text-danger">
-                            Campo obrigatório!
-                        </small>
-                        <label>UF</label>
-                        <input class="form-control" name="uf" ng-model="vm.cliente.endereco.uf"
-                           ng-required="true" placeholder="UF">
-                        <small ng-show="vm.formEndereco.uf.$error.required && vm.validar"
-                           class="form-text text-danger">
-                            Campo obrigatório!
-                        </small>
-                    </form>
-                </div>
+
                 <div class="d-flex justify-content-between align-items-center">
                     <button class="btn btn-primary mb-1" type="submit" ng-click="vm.validar = true;">
                         Cadastrar
                     </button>
                 </div>
             </form>
+            <div class="text-left"><b>Endereço</b></div>
+            <div class="form-group">
+                <form name="vm.formEndereco" ng-submit="vm.buscarCep()">
+                    <button class="btn btn-primary mb-1" required type="submit">Consultar CEP</button>
+                    <small class="form-text text-danger"> {{ vm.error }}
+                    </small>
+                    <input class="form-control" required type="number" name="cep" ng-model="vm.cliente.end.cep"
+                        placeholder="CEP">
+                    <small ng-show="vm.formEndereco.cep.$error.required && vm.validar" class="form-text text-danger">
+                        Campo obrigatório!
+                    </small>
+                    <label>Logradouro</label>
+                    <input class="form-control" name="logradouro" ng-model="vm.cliente.end.logradouro"
+                        placeholder="Logradouro">
+                    <label>Complemento</label>
+                    <input class="form-control" name="complemento" ng-model="vm.cliente.end.complemento"
+                        placeholder="Complemento">
+                    <label>Bairro</label>
+                    <input class="form-control" required name="bairro" ng-model="vm.cliente.end.bairro"
+                        placeholder="Bairro">
+                    <small ng-show="vm.formEndereco.bairro.$error.required && vm.validar" class="form-text text-danger">
+                        Campo obrigatório!
+                    </small>
+                    <label>Cidade</label>
+                    <input class="form-control" required name="cidade" ng-model="vm.cliente.end.cidade"
+                        placeholder="Cidade">
+                    <small ng-show="vm.formEndereco.cidade.$error.required && vm.validar" class="form-text text-danger">
+                        Campo obrigatório!
+                    </small>
+                    <label>UF</label>
+                    <input class="form-control" reuired name="uf" ng-model="vm.cliente.end.uf" placeholder="UF">
+                    <small ng-show="vm.formEndereco.uf.$error.required && vm.validar" class="form-text text-danger">
+                        Campo obrigatório!
+                    </small>
+                </form>
+            </div>
         </div>
     </div>
 </div>

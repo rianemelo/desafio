@@ -52,11 +52,6 @@
             return { error: true, msg: _error.data.message };
         }
 
-        /* function path(_path) {
-            $rootScope.alertas = [];
-            return _path ? $location.path(_path) : $location.path();
-        } */
-
         function go(_path) {
             $rootScope.alertas = [];
             $rootScope.placa = "";

@@ -11,7 +11,8 @@
         return {
             listarClientes: listarClientes,
             inserirCliente: inserirCliente,
-            buscarClientePorCpf: buscarClientePorCpf
+            buscarClientePorCpf: buscarClientePorCpf,
+            buscarCep: buscarCep
         }
 
         // ======================================
@@ -39,13 +40,25 @@
                     return response.data;
                 })
                 .catch(helper.sendError);
-                
+
                 /* sem usar a helper
                 .catch(function (error) {
                     console.log(error.data.message);
                 }); */
         }
 
+        function buscarCep(cep) {
+            return $http.get('https://viacep.com.br/ws/' + cep + '/json/')
+                .then(function (response) {
+                    console.log("response do cep==>>", response);
+                    return response.data;
+                    
+                })
+                //.catch(error);
+                .catch(function (error) {
+                    console.log("error===>", error.data.erro);
+                });
+        }
         
 
     }
