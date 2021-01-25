@@ -1,66 +1,48 @@
-# como rodar?
+# desafioapi project
 
-1. Apos clonar o projeto acesse o diretorio "desafiofront" e execute os comandos: 
+This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-npm install (para instalar as dependencias, necessario rodar apenas uma vez)
+If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
-e npm start (para executar o projeto localmente). Apos executar os comandos acima, o 
+## Running the application in dev mode
 
-front-end ficara disponivel em http://localhost:3000 .
+You can run your application in dev mode that enables live coding using:
+```shell script
+./mvnw compile quarkus:dev
+```
 
-2. Acesse o diretorio "desafioapi" e rode o comando  mvnw compile quarkus:dev (para executar
+## Packaging and running the application
 
-o projeto localmente). O back-end ficara disponivel em http://localhost:8080/api
+The application can be packaged using:
+```shell script
+./mvnw package
+```
+It produces the `desafioapi-1.0.0-SNAPSHOT-runner.jar` file in the `/target` directory.
+Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/lib` directory.
 
-e utilize o swagger para ver todos os endpoints em http://localhost:8080/swagger-ui/ .
+If you want to build an _über-jar_, execute the following command:
+```shell script
+./mvnw package -Dquarkus.package.type=uber-jar
+```
 
-## Sobre o projeto
+The application is now runnable using `java -jar target/desafioapi-1.0.0-SNAPSHOT-runner.jar`.
 
-Uma locadora de automoveis deseja fazer um sistema de locacao de veiculos. A locadora
+## Creating a native executable
 
-so permite que um cliente alugue um carro por vez e um mesmo carro so pode ser alugado para
+You can create a native executable using: 
+```shell script
+./mvnw package -Pnative
+```
 
-um outro cliente no momento que ele se encontra disponivel novamente. Essa é a regra de  
+Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
+```shell script
+./mvnw package -Pnative -Dquarkus.native.container-build=true
+```
 
-negocio para o aluguel de carros. 
+You can then execute your native executable with: `./target/desafioapi-1.0.0-SNAPSHOT-runner`
 
-1. Para cadastro do cliente (front-end)
-Campo Nome:
-▪ Campo obrigatorio;
-▪ Mínimo de 3 caracteres;
-▪ Máximo de 100 caracteres;
-▪ Permite apenas letras e espacos.
-Campo CPF:
-▪ Campo obrigatorio;
-▪ Permite apenas numeros.
-Campo Endereco (CEP, Logradouro, Complemento, bairro, cidade e UF):
-▪ Obrigatorio preenchimento de CEP, bairro, cidade e uf;
-▪ Deve estar integrado com um servico de consulta de CEP (https://viacep.com.br);
-▪ O usuario pode alterar os dados que retornaram do serviço de consulta de CEP.
-Campo E-mail:
-▪ Deve ser um e-mail valido.
-Campo Contato:
-▪ Deve ser um telefone residencial ou celular valido.
+If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.html.
 
-2. Para cadastro do cliente (back-end)
-Para cada cliente, aplicar as seguintes regras:
-▪ Nao permitir dois clientes com mesmo CPF;
-▪ O nome nao deve ter mais que 100 caracteres ou menos que 3.
+# Command Mode
 
-3. Para alugueis de carros (front-end)
-▪ Nao permitir aluguel sem cliente.
-▪ Exibir somente carros disponiveis para aluguel.
-
-4. Para alugueis de carros (back-end)
-▪ Nao permitir que um cliente alugue mais de um carro.
-▪ Nao permitir que o mesmo carro seja alugado por mais de um cliente simultaneamente.
-
-A funcionalidade de “listar carros” diferencia carros disponiveis dos carros alugados 
-
-e exibe o atual locatario.
-
-A funcionalidade de “listar clientes” indica se ele tem um carro alugado e qual modelo.
-
-A funcionalidade “exibir histórico de cliente” apresenta o histórico de todos os carros
-
-que o cliente ja alugou.
+Guide: https://quarkus.io/guides/command-mode-reference
